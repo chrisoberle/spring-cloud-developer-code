@@ -5,6 +5,7 @@ import io.pivotal.pal.tracker.projects.ProjectInfo;
 import io.pivotal.pal.tracker.projects.data.ProjectDataGateway;
 import io.pivotal.pal.tracker.projects.data.ProjectRecord;
 import org.junit.Test;
+import org.springframework.cloud.sleuth.Tracer;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
@@ -21,7 +22,8 @@ import static test.pivotal.pal.tracker.projects.TestBuilders.*;
 public class ProjectControllerTest {
 
     private ProjectDataGateway gateway = mock(ProjectDataGateway.class);
-    private ProjectController controller = new ProjectController(gateway);
+    private Tracer tracer = mock(Tracer.class);
+    private ProjectController controller = new ProjectController(gateway,tracer);
 
     @Test
     public void testCreate() {
